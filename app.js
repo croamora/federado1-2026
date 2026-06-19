@@ -95,7 +95,7 @@ function getOpenModality(item) {
 
 function getCompetitionCategory(item) {
   const modality = getOpenModality(item);
-  return modality ? `${modality} · ${item.category}` : item.category;
+  return modality ? `${modality} ${item.category}` : item.category;
 }
 
 function getDocId(item) {
