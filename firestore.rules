@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /scores/{docId} {
+      allow read: if true;
+      allow write: if
+        request.resource.data.keys().hasOnly([
+          'score',
+          'difficulty',
+          'artistry',
+          'execution',
+          'penalty',
+          'notes',
+          'passed',
+          'updatedAt'
+        ]) &&
+        (!request.resource.data.keys().hasAny(['score']) || (request.resource.data.score is string && request.resource.data.score.size() <= 10)) &&
+        (!request.resource.data.keys().hasAny(['difficulty']) || (request.resource.data.difficulty is string && request.resource.data.difficulty.size() <= 10)) &&
+        (!request.resource.data.keys().hasAny(['artistry']) || (request.resource.data.artistry is string && request.resource.data.artistry.size() <= 10)) &&
+        (!request.resource.data.keys().hasAny(['execution']) || (request.resource.data.execution is string && request.resource.data.execution.size() <= 10)) &&
+        (!request.resource.data.keys().hasAny(['penalty']) || (request.resource.data.penalty is string && request.resource.data.penalty.size() <= 10)) &&
+        (!request.resource.data.keys().hasAny(['notes']) || (request.resource.data.notes is string && request.resource.data.notes.size() <= 500)) &&
+        (!request.resource.data.keys().hasAny(['passed']) || request.resource.data.passed is bool);
+    }
+  }
+}

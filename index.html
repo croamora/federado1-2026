@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Federado 1 2026 - Orden de paso</title>
+    <meta name="description" content="Orden de paso, control de presentación y puntajes del Control 1 Zona Sur Concepción 2026." />
+    <meta property="og:title" content="Federado 1 2026 - Orden de paso" />
+    <meta property="og:description" content="Control de paso y puntajes por día, banca y categoría." />
+    <meta name="theme-color" content="#17130f" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,650;9..144,750&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <header class="hero">
+      <nav class="topbar" aria-label="Resumen del evento">
+        <span class="brand-mark" aria-hidden="true">F1</span>
+        <span id="syncStatus" class="sync-pill">Conectando</span>
+      </nav>
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Control federado · Zona Sur</p>
+          <h1>Orden de paso y puntajes en vivo</h1>
+          <p class="hero-copy">Carga por sábado, domingo y bancas. Marca quién pasó y registra el puntaje final sin perder acceso al detalle técnico.</p>
+        </div>
+        <aside class="hero-card" aria-label="Indicadores">
+          <p id="eventTitle" class="event-title">Control 1 Zona Sur - Concepción</p>
+          <div class="metric-grid">
+            <span><strong id="totalEntries">0</strong> participantes</span>
+            <span><strong id="passedCount">0</strong> pasaron</span>
+            <span><strong id="scoredCount">0</strong> con puntaje</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <main id="main" class="shell">
+      <section class="view-tabs" aria-label="Vista principal">
+        <button class="view-tab is-active" data-view="orden" type="button">Orden</button>
+        <button class="view-tab" data-view="ranking" type="button">Lugares</button>
+      </section>
+
+      <section id="orderPanel" class="panel" aria-label="Orden de paso">
+        <div class="filters">
+          <label>Día
+            <select id="dayFilter">
+              <option value="sabado">Sábado</option>
+              <option value="domingo">Domingo</option>
+            </select>
+          </label>
+          <label>Banca
+            <select id="benchFilter">
+              <option value="todos">Todas</option>
+              <option value="1">Banca 1</option>
+              <option value="2">Banca 2</option>
+            </select>
+          </label>
+          <label>Club
+            <select id="clubFilter"><option value="todos">Todos</option></select>
+          </label>
+          <label>Categoría
+            <select id="categoryFilter"><option value="todos">Todas</option></select>
+          </label>
+          <label class="search-field">Buscar
+            <input id="searchFilter" type="search" placeholder="Nombre, club, categoría o aparato" autocomplete="off" />
+          </label>
+        </div>
+        <div class="section-head">
+          <div>
+            <p id="dayLabel" class="section-kicker">Sábado 20 de junio</p>
+            <h2>Control de paso</h2>
+          </div>
+          <p id="visibleCount" class="count-pill">0 visibles</p>
+        </div>
+        <section id="orderList" class="order-list" aria-live="polite"></section>
+      </section>
+
+      <section id="rankingPanel" class="panel hidden" aria-label="Lugares por categoría">
+        <div class="filters ranking-filters">
+          <label>Día
+            <select id="rankingDayFilter">
+              <option value="todos">Todos</option>
+              <option value="sabado">Sábado</option>
+              <option value="domingo">Domingo</option>
+            </select>
+          </label>
+          <label>Banca
+            <select id="rankingBenchFilter">
+              <option value="todos">Todas</option>
+              <option value="1">Banca 1</option>
+              <option value="2">Banca 2</option>
+            </select>
+          </label>
+          <label>Categoría
+            <select id="rankingCategoryFilter"><option value="todos">Todas</option></select>
+          </label>
+        </div>
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Ranking automático</p>
+            <h2>Lugares por categoría</h2>
+          </div>
+          <p class="count-pill">Ordenado por puntaje final</p>
+        </div>
+        <section id="rankingList" class="ranking-list" aria-live="polite"></section>
+      </section>
+    </main>
+
+    <template id="entryTemplate">
+      <article class="entry-card">
+        <div class="entry-top">
+          <div class="chips">
+            <span class="chip bench-chip"></span>
+            <span class="chip time-chip"></span>
+          </div>
+          <label class="passed-toggle">
+            <input class="passed-input" type="checkbox" />
+            <span>Pasó</span>
+          </label>
+        </div>
+        <div class="entry-main">
+          <p class="category-line"></p>
+          <h3 class="entry-name"></h3>
+          <p class="entry-meta"></p>
+        </div>
+        <div class="score-primary">
+          <label>Puntaje final</label>
+          <input class="score-input" inputmode="decimal" type="text" placeholder="0.00" aria-label="Puntaje final" />
+        </div>
+        <details class="technical-details">
+          <summary>Detalle técnico</summary>
+          <div class="technical-grid">
+            <label>D
+              <input class="difficulty-input" inputmode="decimal" type="text" placeholder="0.00" />
+            </label>
+            <label>A
+              <input class="artistry-input" inputmode="decimal" type="text" placeholder="0.00" />
+            </label>
+            <label>E
+              <input class="execution-input" inputmode="decimal" type="text" placeholder="0.00" />
+            </label>
+            <label>Pen.
+              <input class="penalty-input" inputmode="decimal" type="text" placeholder="0.00" />
+            </label>
+          </div>
+          <label class="notes-label">Notas
+            <textarea class="notes-input" rows="3" placeholder="Observaciones breves"></textarea>
+          </label>
+        </details>
+      </article>
+    </template>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
