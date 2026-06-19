@@ -87,6 +87,14 @@ function dayName(day) {
   return day === "sabado" ? "Sábado" : "Domingo";
 }
 
+function isOpenGroup(item) {
+  return /\b(D[ÚU]O|TR[ÍI]O|CONJUNTO|GRUPO)\s+OPEN\b/i.test(item.club);
+}
+
+function getCompetitionCategory(item) {
+  return isOpenGroup(item) ? `${item.club} · ${item.category}` : item.category;
+}
+
 function getDocId(item) {
   return `federado1-2026-${item.id}`;
 }
@@ -117,7 +125,7 @@ function updateFilterOptions() {
   const activeDay = els.dayFilter.value;
   const dayItems = entryItems.filter((item) => item.day === activeDay);
   const clubs = [...new Set(dayItems.map((item) => item.club).filter(Boolean))].sort((a, b) => a.localeCompare(b, "es"));
-  const categories = [...new Set(dayItems.map((item) => item.category).filter(Boolean))].sort((a, b) => a.localeCompare(b, "es"));
+  const categories = [...new Set(dayItems.map(getCompetitionCategory).filter(Boolean))].sort((a, b) => a.localeCompare(b, "es"));
   buildSelectOptions(els.clubFilter, clubs, "Todos");
   buildSelectOptions(els.categoryFilter, categories, "Todas");
 }
@@ -128,7 +136,7 @@ function updateRankingOptions() {
   const categories = [...new Set(entryItems
     .filter((item) => day === "todos" || item.day === day)
     .filter((item) => bench === "todos" || item.banca === bench)
-    .map((item) => item.category)
+    .map(getCompetitionCategory)
     .filter(Boolean))].sort((a, b) => a.localeCompare(b, "es"));
   buildSelectOptions(els.rankingCategoryFilter, categories, "Todas");
 }
@@ -145,7 +153,7 @@ function getFilteredOrderItems() {
     const haystack = `${item.name} ${item.club} ${item.category} ${item.apparatus} ${item.time}`.toLowerCase();
     return (bench === "todos" || item.banca === bench)
       && (club === "todos" || item.club === club)
-      && (category === "todos" || item.category === category)
+      && (category === "todos" || getCompetitionCategory(item) === category)
       && (!search || haystack.includes(search));
   });
 }
@@ -221,7 +229,7 @@ function renderEntry(item) {
   card.dataset.id = id;
   card.querySelector(".bench-chip").textContent = `Banca ${item.banca} · #${item.number}`;
   card.querySelector(".time-chip").textContent = item.time;
-  card.querySelector(".category-line").textContent = `${item.category} · ${item.apparatus}`;
+  card.querySelector(".category-line").textContent = `${getCompetitionCategory(item)} · ${item.apparatus}`;
   card.querySelector(".entry-name").textContent = item.name;
   card.querySelector(".entry-meta").textContent = `${item.club} · ${dayName(item.day)}`;
 
@@ -278,7 +286,7 @@ function getRankingItems() {
   return entryItems
     .filter((item) => day === "todos" || item.day === day)
     .filter((item) => bench === "todos" || item.banca === bench)
-    .filter((item) => category === "todos" || item.category === category)
+    .filter((item) => category === "todos" || getCompetitionCategory(item) === category)
     .map((item) => ({ ...item, score: scoreNumber(getScore(getDocId(item)).score) }));
 }
 
@@ -286,7 +294,7 @@ function renderRanking() {
   els.rankingList.innerHTML = "";
   const grouped = new Map();
   getRankingItems().forEach((item) => {
-    const key = item.category || "Sin categoría";
+    const key = getCompetitionCategory(item) || "Sin categoría";
     if (!grouped.has(key)) grouped.set(key, []);
     grouped.get(key).push(item);
   });
