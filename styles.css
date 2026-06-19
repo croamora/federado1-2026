@@ -1,18 +1,19 @@
 :root {
-  --bg: #fff4e8;
-  --bg-strong: #151119;
-  --surface: #fffdf8;
-  --surface-2: #f5dcc8;
-  --ink: #1e1724;
-  --muted: #695d6f;
-  --line: #ead1c3;
-  --accent: #db5a3d;
-  --accent-dark: #9b321f;
-  --accent-soft: #ffd8c8;
-  --good: #21875b;
-  --gold: #d99a25;
-  --violet: #5f3dc4;
-  --shadow: 0 24px 60px rgba(101, 50, 27, 0.14);
+  --bg: #fff0f7;
+  --bg-strong: #190b2a;
+  --surface: #fffafe;
+  --surface-2: #f7dcff;
+  --ink: #20112f;
+  --muted: #6f5b7b;
+  --line: #efc9e8;
+  --accent: #e2338f;
+  --accent-dark: #a20f63;
+  --accent-soft: #ffd4ec;
+  --good: #14956f;
+  --gold: #f2a619;
+  --violet: #6f42d8;
+  --cyan: #00a8c8;
+  --shadow: 0 24px 60px rgba(137, 22, 94, 0.16);
   --radius-lg: 28px;
   --radius-md: 18px;
   --radius-sm: 12px;
@@ -27,9 +28,10 @@ body {
   color: var(--ink);
   font-family: Manrope, system-ui, sans-serif;
   background:
-    radial-gradient(circle at 18% 8%, rgba(255, 132, 78, 0.32), transparent 28rem),
-    radial-gradient(circle at 88% 22%, rgba(95, 61, 196, 0.15), transparent 24rem),
-    linear-gradient(135deg, #fffaf2 0%, var(--bg) 54%, #ffe2cf 100%);
+    radial-gradient(circle at 18% 8%, rgba(226, 51, 143, 0.26), transparent 28rem),
+    radial-gradient(circle at 82% 18%, rgba(111, 66, 216, 0.2), transparent 26rem),
+    radial-gradient(circle at 88% 70%, rgba(0, 168, 200, 0.16), transparent 24rem),
+    linear-gradient(135deg, #fffaff 0%, var(--bg) 48%, #ffe0f0 100%);
   min-height: 100dvh;
 }
 
@@ -66,9 +68,10 @@ button { cursor: pointer; }
 .hero {
   color: #fff8ec;
   background:
-    linear-gradient(110deg, rgba(21, 17, 25, 0.98), rgba(116, 42, 30, 0.94)),
-    radial-gradient(circle at 78% 18%, rgba(255, 150, 74, 0.5), transparent 26rem),
-    radial-gradient(circle at 18% 85%, rgba(95, 61, 196, 0.28), transparent 22rem);
+    linear-gradient(112deg, rgba(25, 11, 42, 0.98), rgba(126, 17, 92, 0.95)),
+    radial-gradient(circle at 76% 16%, rgba(255, 88, 170, 0.62), transparent 26rem),
+    radial-gradient(circle at 18% 82%, rgba(0, 188, 212, 0.3), transparent 22rem),
+    radial-gradient(circle at 52% 108%, rgba(242, 166, 25, 0.22), transparent 20rem);
   padding: 18px clamp(16px, 4vw, 48px) 30px;
   overflow: hidden;
 }
@@ -131,7 +134,7 @@ button { cursor: pointer; }
   text-transform: uppercase;
 }
 
-.hero .eyebrow { color: #ffbf7a; }
+.hero .eyebrow { color: #ffcfec; }
 
 h1, h2, h3 { font-family: Fraunces, Georgia, serif; text-wrap: balance; }
 
@@ -146,7 +149,7 @@ h1 {
 .hero-copy {
   max-width: 620px;
   margin: 1.35rem 0 0;
-  color: #ffe4c7;
+  color: #ffe7f5;
   font-size: clamp(1rem, 2vw, 1.18rem);
   line-height: 1.65;
 }
@@ -155,7 +158,7 @@ h1 {
   border: 1px solid rgba(255, 248, 236, 0.18);
   border-radius: var(--radius-lg);
   padding: 1.1rem;
-  background: rgba(255, 248, 236, 0.12);
+  background: rgba(255, 247, 253, 0.14);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(14px);
 }
@@ -175,7 +178,7 @@ h1 {
   padding: 0.75rem;
   border-radius: 18px;
   background: rgba(255, 248, 236, 0.1);
-  color: #ffe1bd;
+  color: #ffe4f4;
   font-size: 0.78rem;
 }
 
@@ -196,7 +199,7 @@ h1 {
   padding: 0.45rem;
   border: 1px solid rgba(223, 209, 190, 0.9);
   border-radius: 999px;
-  background: rgba(255, 253, 248, 0.92);
+  background: rgba(255, 250, 254, 0.94);
   box-shadow: var(--shadow);
   backdrop-filter: blur(12px);
 }
@@ -213,13 +216,13 @@ h1 {
 
 .view-tab:hover { transform: translateY(-1px); }
 .view-tab:active { transform: translateY(1px) scale(0.99); }
-.view-tab.is-active { background: var(--ink); color: #fff8ec; }
+.view-tab.is-active { background: linear-gradient(135deg, var(--accent), var(--violet)); color: white; }
 
 .panel {
   border: 1px solid rgba(223, 209, 190, 0.9);
   border-radius: var(--radius-lg);
   padding: clamp(14px, 2vw, 24px);
-  background: rgba(255, 253, 248, 0.82);
+  background: rgba(255, 250, 254, 0.86);
   box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
 }
@@ -246,7 +249,7 @@ select, input, textarea {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  background: #fffefa;
+  background: #fffafe;
   color: var(--ink);
   padding: 0.82rem 0.9rem;
   outline: none;
@@ -287,7 +290,7 @@ select:focus, input:focus, textarea:focus, button:focus-visible {
 .entry-card, .break-card, .ranking-group, .empty-state {
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  background: linear-gradient(180deg, #fffefa 0%, var(--surface) 100%);
+  background: linear-gradient(180deg, #ffffff 0%, var(--surface) 100%);
   box-shadow: 0 14px 38px rgba(67, 45, 21, 0.08);
 }
 
@@ -310,9 +313,9 @@ select:focus, input:focus, textarea:focus, button:focus-visible {
 }
 
 .entry-card.is-passed::before { background: var(--good); }
-.entry-card.has-score { border-color: rgba(159, 74, 47, 0.4); }
-.entry-card.has-score::before { background: var(--gold); }
-.entry-card.is-passed.has-score::before { background: linear-gradient(var(--good), var(--gold)); }
+.entry-card.has-score { border-color: rgba(226, 51, 143, 0.42); }
+.entry-card.has-score::before { background: linear-gradient(180deg, var(--accent), var(--gold)); }
+.entry-card.is-passed.has-score::before { background: linear-gradient(var(--good), var(--accent), var(--gold)); }
 
 .entry-top {
   display: flex;
@@ -329,8 +332,8 @@ select:focus, input:focus, textarea:focus, button:focus-visible {
   min-height: 30px;
   border-radius: 999px;
   padding: 0.35rem 0.62rem;
-  background: #f2eadf;
-  color: #4d3e31;
+  background: #f4e3ff;
+  color: #4a2472;
   font-size: 0.76rem;
   font-weight: 900;
 }
@@ -345,7 +348,7 @@ select:focus, input:focus, textarea:focus, button:focus-visible {
   padding: 0.35rem 0.65rem;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: #fffdf8;
+  background: #fffafe;
   color: var(--ink);
   font-weight: 900;
   white-space: nowrap;
@@ -377,7 +380,7 @@ select:focus, input:focus, textarea:focus, button:focus-visible {
   gap: 0.75rem;
   padding: 0.75rem;
   border-radius: 16px;
-  background: linear-gradient(135deg, #fff0df, #ffe0cf);
+  background: linear-gradient(135deg, #ffe1f2, #efe2ff 58%, #def8ff);
 }
 
 .score-primary label {
@@ -388,7 +391,7 @@ select:focus, input:focus, textarea:focus, button:focus-visible {
 .score-input {
   min-height: 52px;
   border-color: rgba(159, 74, 47, 0.34);
-  color: #8f2b1d;
+  color: var(--accent-dark);
   font-size: 1.25rem;
   font-weight: 900;
   text-align: center;
@@ -422,7 +425,7 @@ select:focus, input:focus, textarea:focus, button:focus-visible {
   align-items: center;
   padding: 1rem;
   color: var(--accent-dark);
-  background: linear-gradient(135deg, #ffe4cf, #fff0df);
+  background: linear-gradient(135deg, #ffe1f2, #efe2ff 58%, #def8ff);
   border-style: dashed;
 }
 
@@ -436,7 +439,7 @@ select:focus, input:focus, textarea:focus, button:focus-visible {
   margin: 0;
   padding: 1rem;
   border-bottom: 1px solid var(--line);
-  background: linear-gradient(135deg, #fff0df, #ffe0cf);
+  background: linear-gradient(135deg, #ffe1f2, #efe2ff 58%, #def8ff);
   letter-spacing: -0.03em;
 }
 
@@ -457,7 +460,7 @@ select:focus, input:focus, textarea:focus, button:focus-visible {
   width: 34px;
   height: 34px;
   border-radius: 11px;
-  background: var(--ink);
+  background: linear-gradient(135deg, var(--accent), var(--violet));
   color: white;
   font-weight: 900;
   font-variant-numeric: tabular-nums;
