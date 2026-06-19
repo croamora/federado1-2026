@@ -7,7 +7,7 @@ import {
   serverTimestamp,
   setDoc
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
-import { allEntries, eventInfo, schedule } from "./data.js";
+import { allEntries, eventInfo, schedule } from "./data.js?v=20260619-2";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBno2LpCgrLdr1yhYZlZ0WAYKf-u-Iezrw",
@@ -87,12 +87,15 @@ function dayName(day) {
   return day === "sabado" ? "Sábado" : "Domingo";
 }
 
-function isOpenGroup(item) {
-  return /\b(D[ÚU]O|TR[ÍI]O|CONJUNTO|GRUPO)\s+OPEN\b/i.test(item.club);
+function getOpenModality(item) {
+  const source = [item.club, item.name, item.category, item.apparatus].join(" ");
+  const match = source.match(/(D[ÚU]O|TR[ÍI]O|CONJUNTO|GRUPO)\s+OPEN/i);
+  return match ? match[0].toUpperCase().replace("DUO", "DÚO").replace("TRIO", "TRÍO") : "";
 }
 
 function getCompetitionCategory(item) {
-  return isOpenGroup(item) ? `${item.club} · ${item.category}` : item.category;
+  const modality = getOpenModality(item);
+  return modality ? `${modality} · ${item.category}` : item.category;
 }
 
 function getDocId(item) {
